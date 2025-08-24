@@ -52,6 +52,17 @@ namespace Benetti
             LeanTween.value(text.gameObject, text.color, originalColor, duration)
                 .setOnUpdate((Color val) => text.color = val);
         }
+
+        public static void SlideYUILinear(RectTransform rTransform, float position, float time)
+        {
+            LeanTween.moveY(rTransform, position, time).setEaseLinear();
+        }
+
+        public static void SlideYUILinearWithDisable(RectTransform rTransform, float position, float time)
+        {
+            LeanTween.moveY(rTransform, position, time).setEaseLinear()
+                .setOnComplete(() => {rTransform.gameObject.SetActive(false); });
+        }
     }
 }
 
