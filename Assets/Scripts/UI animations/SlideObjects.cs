@@ -3,10 +3,10 @@ using Benetti;
 
 public class SlideObjects : MonoBehaviour
 {
-    public RectTransform rTransform;
-    public float newPosition;
-    public float originalPosition;
-    public float animationTime;
+    public static RectTransform rTransform;
+    public static float newPosition;
+    public static float originalPosition;
+    public static float animationTime;
     
     void Start()
     {
@@ -18,8 +18,12 @@ public class SlideObjects : MonoBehaviour
         originalPosition = rTransform.position.y;
     }
 
-    public void OnEnable()
+    public static void AnimateIn()
     {
         UIAnimations.SlideYUILinear(rTransform, newPosition, animationTime);
+    }
+    public static void AnimateOut()
+    {
+        UIAnimations.SlideYUILinearWithDisable(rTransform, originalPosition, animationTime);
     }
 }
