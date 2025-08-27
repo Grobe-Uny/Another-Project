@@ -63,6 +63,22 @@ namespace Benetti
             LeanTween.moveY(rTransform, position, time).setEaseLinear()
                 .setOnComplete(() => {rTransform.gameObject.SetActive(false); });
         }
+
+        public static void ScaleUI(RectTransform rTransform, Vector2 newPosition, float duration)
+        {
+            LeanTween.size(rTransform, newPosition, duration).setEaseInQuad();
+        }
+
+        public static void ScaleUIWithDisable(RectTransform rTransform, Vector2 newPosition, float duration)
+        {
+            LeanTween.size(rTransform, newPosition, duration).setEaseInQuad()
+                .setOnComplete(() => {rTransform.gameObject.SetActive(false); });
+        }
+
+        public static void FadeUI(RectTransform rTransform, float alpha, float duration)
+        {
+            LeanTween.alpha(rTransform, alpha, duration).setEaseInQuad();
+        }
     }
 }
 
