@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Benetti;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] public RectTransform Tabs;
     void Start()
     {
+        #if UNITY_EDITOR
+        if (!SceneManager.GetSceneByName("ManagerLoader").isLoaded)
+            SceneManager.LoadSceneAsync((int)SceneEnum.ManagerHolder, LoadSceneMode.Additive);
+        #endif
         originalPosition = ExitPromptRectTransform.position.y;
         NewGame.onClick.AddListener(()=>BeginNewGame());
         Options.onClick.AddListener(()=>OpenOptions());

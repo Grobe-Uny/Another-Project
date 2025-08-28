@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
+    [SerializeField]public Sound[] sounds;
     public AudioMixer mixer;
 
     void Awake()
@@ -30,5 +30,14 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+    }
+    public void StopSound(string soundName)
+    {
+        Sound s = Array.Find(sounds, sound => sound.Name == name); 
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + "is not found!");
+        }
+        s.source.Stop();
     }
 }
