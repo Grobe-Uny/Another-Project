@@ -24,8 +24,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField]private RectTransform OptionsMenuUI;
     [SerializeField]private Vector2 optionsMenuSize;
     [SerializeField]private Vector2 optionsMenuOriginalSize;
-    public OptionsMenu optionsMenu;
-    [SerializeField]public RectTransform[] animatableObjects;
+    [SerializeField][Tooltip("Here you put all objects that you want to quickly fade out when closing options menu")]public RectTransform[] animatableObjectsMainOptions;
+    [SerializeField][Tooltip("Here you put all objects that you want to quickly fade in/out under tabs in tabs")]public RectTransform[] animatableObjectsTabsOptions;
     [SerializeField] public RectTransform Tabs;
     void Start()
     {
@@ -66,11 +66,20 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator CloseOptionsAnimationSequence()
     {
-        UIAnimations.SlideYUILinearWithDisable(Tabs, 0, animationTime);
-        for (int i = 0; i < animatableObjects.Length; i++)
+        for (int i = 0; i < animatableObjectsTabsOptions.Length; i++)
         {
-            UIAnimations.FadeUI(animatableObjects[i], 0, 0.001f);
-            animatableObjects[i].gameObject.SetActive(false);
+            UIAnimations.FadeUI(animatableObjectsTabsOptions[i],0, 0.0001f);
+            animatableObjectsTabsOptions[i].gameObject.SetActive(false);
+        }
+
+        yield return new WaitForSeconds(0.01f);
+        
+        UIAnimations.SlideYUILinearWithDisable(Tabs, 0, animationTime);
+        
+        for (int i = 0; i < animatableObjectsMainOptions.Length; i++)
+        {
+            UIAnimations.FadeUI(animatableObjectsMainOptions[i], 0, 0.001f);
+            animatableObjectsMainOptions[i].gameObject.SetActive(false);
         }
 
         yield return new WaitForSeconds(animationTime);
@@ -83,16 +92,22 @@ public class MainMenu : MonoBehaviour
         
         OptionsMenuUI.gameObject.SetActive(true);
         UIAnimations.ScaleUI(OptionsMenuUI, optionsMenuSize, animationTime);
-        
-        for (int i = 0; i < animatableObjects.Length; i++)
+
+        for (int i = 0; i < animatableObjectsMainOptions.Length; i++)
         {
-            animatableObjects[i].gameObject.SetActive(true);
-            UIAnimations.FadeUI(animatableObjects[i], 0.45f,animationTime);
+            animatableObjectsMainOptions[i].gameObject.SetActive(true);
+            UIAnimations.FadeUI(animatableObjectsMainOptions[i], 0.45f,animationTime);
         }
         yield return new WaitForSeconds(animationTime);
         
         Tabs.gameObject.SetActive(true);
         
         UIAnimations.SlideYUILinear(Tabs, 100, animationTime);
+        yield return new WaitForSeconds(0.05f);
+        for (int i = 0; i < animatableObjectsTabsOptions.Length; i++)
+        {
+            animatableObjectsTabsOptions[i].gameObject.SetActive(true);
+            UIAnimations.FadeUI(animatableObjectsTabsOptions[i], 1, 0.0001f);
+        }
     }
 }
