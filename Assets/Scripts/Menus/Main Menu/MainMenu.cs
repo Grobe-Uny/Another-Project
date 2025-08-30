@@ -39,32 +39,37 @@ public class MainMenu : MonoBehaviour
         Options.onClick.AddListener(()=>OpenOptions());
         OpenPrompt.onClick.AddListener(() =>
         {
+            AudioManager.instance.PlaySound("ButtonClick");
             ExitPromptRectTransform.gameObject.SetActive(true);
             UIAnimations.SlideYUILinear(ExitPromptRectTransform, newPosition, animationTime);
         });
         Yes.onClick.AddListener(()=>ExitGame());
-        No.onClick.AddListener(()=> { UIAnimations.SlideYUILinearWithDisable(ExitPromptRectTransform, originalPosition, animationTime); });
+        No.onClick.AddListener(()=> { UIAnimations.SlideYUILinearWithDisable(ExitPromptRectTransform, originalPosition, animationTime, null, ()=>{AudioManager.instance.PlaySound("ButtonClick");}); });
         ExitOptionsButton.onClick.AddListener(()=>ExitOptions());
     }
     void BeginNewGame()
     {
+        AudioManager.instance.PlaySound("ButtonClick");
         Debug.Log("Starting New Game!");
     }
 
     void OpenOptions()
     {
+        AudioManager.instance.PlaySound("ButtonClick");
         Debug.Log("Opening Options!");
         StartCoroutine(OpenOptionsAnimationSequence());
     }
 
     void ExitOptions()
     {
+        AudioManager.instance.PlaySound("ButtonClick");
         Debug.Log("Exiting Options!");
         StartCoroutine(CloseOptionsAnimationSequence());
       
     }
     void ExitGame()
     {
+        AudioManager.instance.PlaySound("ButtonClick");
         Debug.Log("Exiting the Game");
         Application.Quit();
     }
@@ -107,8 +112,12 @@ public class MainMenu : MonoBehaviour
         
         Tabs.gameObject.SetActive(true);
         
-        UIAnimations.SlideYUILinear(Tabs, 100, animationTime);
-        yield return new WaitForSeconds(0.05f);
+        UIAnimations.SlideYUILinearCustomAction(Tabs, 100, animationTime, PopulatingOptions);
+        
+    }
+
+    void PopulatingOptions()
+    {
         for (int i = 0; i < animatableObjectsTabsOptions.Length; i++)
         {
             animatableObjectsTabsOptions[i].gameObject.SetActive(true);

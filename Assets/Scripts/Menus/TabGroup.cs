@@ -12,10 +12,6 @@ public class TabGroup : MonoBehaviour
 
     [SerializeField]private TabButton selectedTab;
 
-    public void Start()
-    {
-        selectedTab = tabButtons[0];
-    }
     public void Subscribe(TabButton tabButton)
     {
         

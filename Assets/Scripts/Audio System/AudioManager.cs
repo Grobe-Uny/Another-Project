@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField]public Sound[] sounds;
+    public Sound[] sounds;
     public AudioMixer mixer;
 
     void Awake()
@@ -21,6 +21,23 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public static AudioManager instance;
+    void Start()
+    {
+        // Ensure there's only one instance of GameManager
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("AudioManager instance created");
+        }
+        else
+        {
+            Destroy(gameObject);
+            Debug.Log("Duplicate AudioManager instance destroyed");
+            return;
+        }
+    }
     public void PlaySound(string soundName)
     {
         Sound s = Array.Find(sounds, sound => sound.Name == soundName);

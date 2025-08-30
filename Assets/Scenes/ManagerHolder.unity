@@ -152,6 +152,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5250acdcd082bdb499a2c7ccb167f8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sounds:
+  - Name: HudUp
+    Clip: {fileID: 8300000, guid: eff4e3e840229814eb0bde9455c8b6fe, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    source: {fileID: 0}
+    MixerGroup: {fileID: 846446546216769388, guid: 7db4ca3940a295e43a60ef186c57aff4,
+      type: 2}
+  - Name: ButtonClick
+    Clip: {fileID: 8300000, guid: 58d3ea0822ba74e41abb174400592de1, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    source: {fileID: 0}
+    MixerGroup: {fileID: 846446546216769388, guid: 7db4ca3940a295e43a60ef186c57aff4,
+      type: 2}
   mixer: {fileID: 24100000, guid: 7db4ca3940a295e43a60ef186c57aff4, type: 2}
 --- !u!4 &1099250758
 Transform:

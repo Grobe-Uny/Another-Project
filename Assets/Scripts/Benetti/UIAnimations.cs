@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -58,10 +59,15 @@ namespace Benetti
             LeanTween.moveY(rTransform, position, time).setEaseLinear();
         }
 
-        public static void SlideYUILinearWithDisable(RectTransform rTransform, float position, float time)
+        public static void SlideYUILinearWithDisable(RectTransform rTransform, float position, float time, Action OnComplete = null, Action OnStart = null)
         {
+            OnStart?.Invoke();
             LeanTween.moveY(rTransform, position, time).setEaseLinear()
-                .setOnComplete(() => {rTransform.gameObject.SetActive(false); });
+                .setOnComplete(() =>
+                {
+                    OnComplete?.Invoke();
+                    rTransform.gameObject.SetActive(false);
+                });
         }
 
         public static void ScaleUI(RectTransform rTransform, Vector2 newPosition, float duration)
@@ -78,6 +84,13 @@ namespace Benetti
         public static void FadeUI(RectTransform rTransform, float alpha, float duration)
         {
             LeanTween.alpha(rTransform, alpha, duration).setEaseInQuad();
+        }
+
+        public static void SlideYUILinearCustomAction(RectTransform rTransform, float position, float time,
+            Action OnComplete = null)
+        {
+            LeanTween.moveY(rTransform, position, time).setEaseLinear()
+                .setOnComplete(() => {OnComplete?.Invoke();});
         }
     }
 }

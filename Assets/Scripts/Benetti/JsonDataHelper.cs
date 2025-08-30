@@ -67,8 +67,14 @@ namespace Benetti
 
                 // Deserialize the JSON string back into an object
                 T data = JsonUtility.FromJson<T>(json);
+                
+                #if UNITY_EDITOR
+                Debug.Log($"Loaded data succesfully from {path}.");
+                Debug.Log($"Loading settings: " + data);
+                #endif
 
                 return data;
+
             }
             catch (Exception e)
             {
