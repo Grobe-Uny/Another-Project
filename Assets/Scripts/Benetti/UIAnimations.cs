@@ -84,6 +84,12 @@ namespace Benetti
         public static void FadeUI(RectTransform rTransform, float alpha, float duration)
         {
             LeanTween.alpha(rTransform, alpha, duration).setEaseInQuad();
+        } 
+        public static void FadeUICustomAction(RectTransform rTransform, float alpha, float duration, Action OnStart = null, Action OnComplete = null)
+        {
+            OnStart?.Invoke();
+            LeanTween.alpha(rTransform, alpha, duration).setEaseInQuad()
+                .setOnComplete(() => {OnComplete?.Invoke();});
         }
 
         public static void SlideYUILinearCustomAction(RectTransform rTransform, float position, float time,

@@ -35,45 +35,55 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadSceneAsync((int)SceneEnum.ManagerHolder, LoadSceneMode.Additive);
         #endif
         originalPosition = ExitPromptRectTransform.position.y;
-        NewGame.onClick.AddListener(()=>BeginNewGame());
-        Options.onClick.AddListener(()=>OpenOptions());
-        OpenPrompt.onClick.AddListener(() =>
-        {
-            AudioManager.instance.PlaySound("ButtonClick");
-            ExitPromptRectTransform.gameObject.SetActive(true);
-            UIAnimations.SlideYUILinear(ExitPromptRectTransform, newPosition, animationTime);
-        });
-        Yes.onClick.AddListener(()=>ExitGame());
-        No.onClick.AddListener(()=> { UIAnimations.SlideYUILinearWithDisable(ExitPromptRectTransform, originalPosition, animationTime, null, ()=>{AudioManager.instance.PlaySound("ButtonClick");}); });
-        ExitOptionsButton.onClick.AddListener(()=>ExitOptions());
+        InitializeButtons();
     }
-    void BeginNewGame()
+
+    #region Button Initialization
+
+    public void InitializeButtons()
     {
-        AudioManager.instance.PlaySound("ButtonClick");
+        NewGame.onClick.AddListener(() => MainMenuHandler.ButtonClickHandler(BeginNewGame));
+        Options.onClick.AddListener(()=>MainMenuHandler.ButtonClickHandler(OpenOptions));
+        OpenPrompt.onClick.AddListener(() => MainMenuHandler.ButtonClickHandler(OpenExitPrompt));
+        Yes.onClick.AddListener(()=>MainMenuHandler.ButtonClickHandler(ExitGame));
+        No.onClick.AddListener(()=> MainMenuHandler.ButtonClickHandler(CloseExitPrompt));
+        ExitOptionsButton.onClick.AddListener(()=>MainMenuHandler.ButtonClickHandler(ExitOptions));
+    }
+    public void BeginNewGame()
+    {
         Debug.Log("Starting New Game!");
     }
 
     void OpenOptions()
     {
-        AudioManager.instance.PlaySound("ButtonClick");
         Debug.Log("Opening Options!");
         StartCoroutine(OpenOptionsAnimationSequence());
     }
 
     void ExitOptions()
     {
-        AudioManager.instance.PlaySound("ButtonClick");
         Debug.Log("Exiting Options!");
         StartCoroutine(CloseOptionsAnimationSequence());
       
     }
     void ExitGame()
     {
-        AudioManager.instance.PlaySound("ButtonClick");
         Debug.Log("Exiting the Game");
         Application.Quit();
     }
+    void OpenExitPrompt()
+    {
+        ExitPromptRectTransform.gameObject.SetActive(true);
+        UIAnimations.SlideYUILinear(ExitPromptRectTransform, newPosition, animationTime);
+    }
+    void CloseExitPrompt()
+    {
+        UIAnimations.SlideYUILinearWithDisable(ExitPromptRectTransform, originalPosition, animationTime, null,
+            () => { AudioManager.instance.PlaySound("ButtonClick"); });
+    }
 
+    #endregion
+   
     IEnumerator CloseOptionsAnimationSequence()
     {
         for (int i = 0; i < animatableObjectsTabsOptions.Length; i++)
@@ -124,4 +134,5 @@ public class MainMenu : MonoBehaviour
             UIAnimations.FadeUI(animatableObjectsTabsOptions[i], 1, 0.0001f);
         }
     }
+    
 }
