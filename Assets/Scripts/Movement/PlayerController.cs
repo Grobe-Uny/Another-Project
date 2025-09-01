@@ -46,14 +46,19 @@ public class PlayerController : MonoBehaviour
 
         // Store the input in a Vector3.
         moveDirection = new Vector3(horizontalInput, 0f, verticalInput);
+        
+        // Update animator parameters for blend tree
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetFloat("Horizontal", horizontalInput);
+            playerAnimator.SetFloat("Vertical", verticalInput);
+        }
     }
 
     void FixedUpdate()
     {
         // --- Movement and Rotation Logic ---
         // We run physics-related code in FixedUpdate for consistency.
-
-      
         
         // If there is no input, do nothing.
         if (moveDirection.magnitude < 0.1f)
@@ -104,7 +109,6 @@ public class PlayerController : MonoBehaviour
 
         // Apply the movement to the Rigidbody's position.
         rb.MovePosition(rb.position + movement);
-        
-        playerAnimator.SetFloat("WalkSpeed", movement.magnitude);
+  
     }
 }
