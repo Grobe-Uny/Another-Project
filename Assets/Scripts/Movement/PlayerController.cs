@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private Transform mainCameraTransform;
     private Vector3 moveDirection;
 
+    public Animator playerAnimator;
+
     void Awake()
     {
         // Get the Rigidbody component attached to this GameObject.
@@ -51,6 +53,8 @@ public class PlayerController : MonoBehaviour
         // --- Movement and Rotation Logic ---
         // We run physics-related code in FixedUpdate for consistency.
 
+      
+        
         // If there is no input, do nothing.
         if (moveDirection.magnitude < 0.1f)
         {
@@ -100,5 +104,7 @@ public class PlayerController : MonoBehaviour
 
         // Apply the movement to the Rigidbody's position.
         rb.MovePosition(rb.position + movement);
+        
+        playerAnimator.SetFloat("WalkSpeed", movement.magnitude);
     }
 }
