@@ -18,6 +18,7 @@ public class PlayerMovementScript : MonoBehaviour
     [Header("Movement Settings")]
     [Tooltip("The maximum speed of the character.")]
     public float maxSpeed = 8f;
+    public float sprintMaxSpeed = 12f;
 
     [Tooltip("How quickly the character reaches max speed.")]
     public float acceleration = 10f;
@@ -37,8 +38,10 @@ public class PlayerMovementScript : MonoBehaviour
 
     // Internal state
     private Vector3 currentVelocity;
+    private Vector3 targetVelocity;
     private Vector2 playerInput;
     private float verticalVelocity; // Used for gravity
+    private float targetSpeed; // Target speed based on input
 
     // Animator parameter hashes for performance
     private readonly int velocityXHash = Animator.StringToHash("velocityX");
@@ -60,6 +63,12 @@ public class PlayerMovementScript : MonoBehaviour
         {
             Debug.LogError("PlayerController: Main Camera not found. Please tag your main camera with 'MainCamera'.");
         }
+    }
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -90,7 +99,16 @@ public class PlayerMovementScript : MonoBehaviour
         Vector3 desiredMoveDirection = (cameraForward * playerInput.y + cameraRight * playerInput.x).normalized;
 
         // Calculate the target velocity
-        Vector3 targetVelocity = desiredMoveDirection * maxSpeed;
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+             targetVelocity = desiredMoveDirection * sprintMaxSpeed;
+             playerAnimator.SetBool("isSprinting", true);
+        }
+        else
+        {
+             targetVelocity = desiredMoveDirection * maxSpeed;
+             playerAnimator.SetBool("isSprinting", false);
+        }
 
         // Determine the rate of change for the velocity
         //float rateOfChange = (playerInput.magnitude > 0.1f) ? acceleration : deceleration;
@@ -164,18 +182,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if (playerAnimator == null || characterController == null) return;
 
-        
-        AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
-
-        // Samo koristi root motion ako je aktivna StopWalking animacija
-        if (state.IsName("StopWalking"))
-        {
-            Vector3 delta = playerAnimator.deltaPosition;
-            delta.y = 0; // ne želimo da animacija pomiče po visini
-            characterController.Move(delta);
-        }
-        
-        /*// Delta kretanja iz root motiona
+        // Delta kretanja iz root motiona
         Vector3 rootDelta = playerAnimator.deltaPosition;
 
         // Smjer iz root motiona (world space)
@@ -185,7 +192,17 @@ public class PlayerMovementScript : MonoBehaviour
         float rootSpeed = playerAnimator.velocity.magnitude;
 
         // Kolika brzina treba biti prema inputu (maksimalna kada input.magnitude = 1)
-        float targetSpeed = playerInput.magnitude * maxSpeed;
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            targetSpeed = playerInput.magnitude * sprintMaxSpeed;
+            playerAnimator.SetBool("isSprinting", true);
+        }
+        else
+        {
+            targetSpeed = playerInput.magnitude * maxSpeed;
+            playerAnimator.SetBool("isSprinting", false);
+        }
+            
 
         // Glatko blendaj root speed prema ciljanom speedu
         float blendedSpeed = Mathf.Lerp(rootSpeed, targetSpeed, 0.5f); 
@@ -207,7 +224,7 @@ public class PlayerMovementScript : MonoBehaviour
         characterController.Move(finalMove);
 
         // Spremi za debug
-        currentVelocity = finalMove / Time.deltaTime;*/
+        currentVelocity = finalMove / Time.deltaTime;
     }
 
     private void HandleAnimation()

@@ -1,0 +1,39 @@
+-------------------------Features-------------------------
+v a0.0.1
+basic ui for main menu
+simple options
+options are saving
+character with animation based movement
+
+v a0.0.2
+hided cursor in game and locked it to the centre of the screen
+
+-------------------------Bugs-----------------------------
+v a0.0.1
+when stoping movement character glitches in place then continues with animation
+
+
+-------------------------QOL Features To-do-----------------
+find better animations that dont look weird
+character moves too slow when movement is animation based
+
+-------------------------To-do----------------------------
+add pause menu
+fix animation bug 
+add scene loading 
+add jumping,crouching and sprinting for more diverse movement
+add fall damage 
+add injuries
+add diseases
+add health system
+add some props for future development
+implement interaction system
+implement looting(1.st part make it like in other games)
+implement level saving
+implement skills system
+implement stats system
+implememt inventory
+implement player data saving 
+implement some unlockable abilities (roll forward, dash??,...)
+add scene transitioning
+rework ui

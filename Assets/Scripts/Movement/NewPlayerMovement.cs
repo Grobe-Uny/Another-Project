@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
-public class PlayerMovementScriptv2 : MonoBehaviour
+public class NewPlayerMovement : MonoBehaviour
 {
     [Header("Debug")]
     public TextMeshProUGUI currentVelocityText;
