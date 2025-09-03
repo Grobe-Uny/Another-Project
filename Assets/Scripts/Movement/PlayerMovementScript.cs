@@ -1,4 +1,5 @@
 using System;
+using Benetti;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class PlayerMovementScript : MonoBehaviour
 {
     [Header("Testing stuff")]
     public TextMeshProUGUI currentVelocitytext;
+    public TextMeshProUGUI currentGameStateText;
     
     
     [Header("Movement Settings")]
@@ -29,6 +31,9 @@ public class PlayerMovementScript : MonoBehaviour
     [Tooltip("The speed at which the character turns to face the movement direction.")]
     public float turnSpeed = 15f;
 
+    [Tooltip("The force applied when the character jumps.")]
+    public float jumpForce = 5f;
+    
     [Header("Dependencies")]
     [Tooltip("The Animator component for the character.")]
     public Animator playerAnimator;
@@ -73,10 +78,22 @@ public class PlayerMovementScript : MonoBehaviour
 
     void Update()
     {
+        // Ako si trenutno u Jump animaciji
+        AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
+
+        if (state.IsName("Jump"))
+        {
+            // Kad animacija završi (normalizedTime >= 1.0f) i lik je na tlu
+            if (state.normalizedTime >= 1.0f && characterController.isGrounded)
+            {
+                playerAnimator.SetBool("isJumping", false);
+            }
+        }
         HandleInput();
         HandleMovement();
         HandleAnimation();
         currentVelocitytext.text = "Current velocity: " + currentVelocity.ToString();
+        currentGameStateText.text = "Current game state: " + GameStateManager.CurrentState.ToString();
     } 
 
     private void HandleInput()
@@ -84,6 +101,11 @@ public class PlayerMovementScript : MonoBehaviour
         // Read input from WASD keys or a gamepad
         playerInput.x = Input.GetAxis("Horizontal");
         playerInput.y = Input.GetAxis("Vertical");
+        if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
+        {
+            verticalVelocity = jumpForce; // pokreni skok
+            playerAnimator.SetBool("isJumpingIdle", true);
+        }
     }
 
     private void HandleMovement()
@@ -167,17 +189,6 @@ public class PlayerMovementScript : MonoBehaviour
         }
     }
 
-    /*private void OnAnimatorMove()
-    {
-        // Delta kretanja koje daje animacija (u world space-u)
-        Vector3 rootMotionDelta = playerAnimator.deltaPosition;
-        
-        // Pomak pomoću CharacterControllera
-        characterController.Move(rootMotionDelta);
-
-        // Ažuriraj currentVelocity da bude jednaka root motion brzini
-        currentVelocity = playerAnimator.velocity; 
-    }*/
     void OnAnimatorMove()
     {
         if (playerAnimator == null || characterController == null) return;
@@ -202,8 +213,6 @@ public class PlayerMovementScript : MonoBehaviour
             targetSpeed = playerInput.magnitude * maxSpeed;
             playerAnimator.SetBool("isSprinting", false);
         }
-            
-
         // Glatko blendaj root speed prema ciljanom speedu
         float blendedSpeed = Mathf.Lerp(rootSpeed, targetSpeed, 0.5f); 
         // Možeš podešavati taj faktor (0.5f) – veći = više root motiona, manji = više input kontrole
@@ -222,6 +231,13 @@ public class PlayerMovementScript : MonoBehaviour
 
         // Pomakni karakter
         characterController.Move(finalMove);
+                
+        // Ako si u Jump stanju, koristi root motion Y
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        {
+            characterController.Move(finalMove.y * Vector3.up * jumpForce * Time.deltaTime);
+        }
+
 
         // Spremi za debug
         currentVelocity = finalMove / Time.deltaTime;

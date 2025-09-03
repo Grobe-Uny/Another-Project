@@ -7,21 +7,25 @@ character with animation based movement
 
 v a0.0.2
 hided cursor in game and locked it to the centre of the screen
-
+add pause menu
+add game state manager
+added sprinting
+added jumping
 -------------------------Bugs-----------------------------
 v a0.0.1
-when stoping movement character glitches in place then continues with animation
-
+when stoping movement character glitches in place then continues with animation (fixed)
+v a.0.0.2
+jumping animation with root motion plays but it doesnt actually jump
 
 -------------------------QOL Features To-do-----------------
 find better animations that dont look weird
 character moves too slow when movement is animation based
 
 -------------------------To-do----------------------------
-add pause menu
-fix animation bug 
+add pause menu --
+fix animation bug -(now is bugging only when transitioning from sprint to anything else)
 add scene loading 
-add jumping,crouching and sprinting for more diverse movement
+add jumping---,crouching and sprinting-- for more diverse movement
 add fall damage 
 add injuries
 add diseases
@@ -36,4 +40,5 @@ implememt inventory
 implement player data saving 
 implement some unlockable abilities (roll forward, dash??,...)
 add scene transitioning
+add game state manager --
 rework ui

@@ -52,6 +52,7 @@ public class MainMenu : MonoBehaviour
     public void BeginNewGame()
     {
         Debug.Log("Starting New Game!");
+        SceneManager.LoadSceneAsync((int)SceneEnum.PrototypingScene, LoadSceneMode.Single);
     }
 
     void OpenOptions()
