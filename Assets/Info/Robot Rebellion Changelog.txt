@@ -36,7 +36,10 @@ implement looting(1.st part make it like in other games)
 implement level saving
 implement skills system
 implement stats system
-implememt inventory
+implement inventory
+implement weapon system
+implement pickup and drop of items
+implement interactive ui
 implement player data saving 
 implement some unlockable abilities (roll forward, dash??,...)
 add scene transitioning

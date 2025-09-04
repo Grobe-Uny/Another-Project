@@ -78,7 +78,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     void Update()
     {
-        // Ako si trenutno u Jump animaciji
+       /* // Ako si trenutno u Jump animaciji
         AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
 
         if (state.IsName("Jump"))
@@ -88,7 +88,7 @@ public class PlayerMovementScript : MonoBehaviour
             {
                 playerAnimator.SetBool("isJumping", false);
             }
-        }
+        }*/
         HandleInput();
         HandleMovement();
         HandleAnimation();
@@ -101,11 +101,11 @@ public class PlayerMovementScript : MonoBehaviour
         // Read input from WASD keys or a gamepad
         playerInput.x = Input.GetAxis("Horizontal");
         playerInput.y = Input.GetAxis("Vertical");
-        if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
+       /* if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
         {
             verticalVelocity = jumpForce; // pokreni skok
             playerAnimator.SetBool("isJumpingIdle", true);
-        }
+        }*/
     }
 
     private void HandleMovement()
@@ -232,11 +232,11 @@ public class PlayerMovementScript : MonoBehaviour
         // Pomakni karakter
         characterController.Move(finalMove);
                 
-        // Ako si u Jump stanju, koristi root motion Y
+        /*// Ako si u Jump stanju, koristi root motion Y
         if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
         {
             characterController.Move(finalMove.y * Vector3.up * jumpForce * Time.deltaTime);
-        }
+        }*/
 
 
         // Spremi za debug

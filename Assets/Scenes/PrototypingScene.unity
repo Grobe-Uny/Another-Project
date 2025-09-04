@@ -8,8 +8,9 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 83dd3e38fac5a664f809319122780157
+  m_OcclusionCullingData: {fileID: 36300000, guid: 4db31e0975d22fb4b8cd2e9b93665c0e,
+    type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -122,6 +123,84 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &77469510
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1454544523413218681, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711512594222273541, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.124
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711512594222273541, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711512594222273541, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.217
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711512594222273541, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711512594222273541, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711512594222273541, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711512594222273541, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711512594222273541, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711512594222273541, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711512594222273541, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4092120211030904511, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_Name
+      value: Torch
+      objectReference: {fileID: 0}
+    - target: {fileID: 4092120211030904511, guid: 15d9883d2f97d474ba13526d33f2f7cd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 15d9883d2f97d474ba13526d33f2f7cd, type: 3}
 --- !u!1 &300793246
 GameObject:
   m_ObjectHideFlags: 3
@@ -1344,7 +1423,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &673804519
 Transform:
@@ -3492,6 +3571,7 @@ MonoBehaviour:
   acceleration: 10
   deceleration: 15
   turnSpeed: 15
+  jumpForce: 5
   playerAnimator: {fileID: 1936136505}
 --- !u!1 &1942644407
 GameObject:
@@ -3947,6 +4027,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 532220302}
   - {fileID: 1422318543}
+  - {fileID: 77469510}
   - {fileID: 1687876994}
   - {fileID: 1936136501}
   - {fileID: 1580921830}
