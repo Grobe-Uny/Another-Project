@@ -16,6 +16,7 @@ public static class SettingsInitializer
         SaveData saveData = JsonDataHelper.Load<SaveData>(fileName);
 
         QualitySettings.vSyncCount = saveData.isVsyncOn ? 1 : 0;
+        Screen.fullScreenMode = saveData.isFullScreenOn ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
         
     }
 }

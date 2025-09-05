@@ -53,7 +53,8 @@ public class PauseMenu : MonoBehaviour
     void ExitToMainMenu()
     {
         Debug.Log("Exiting to Main Menu!");
-        SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Single);
+        SceneManager.UnloadSceneAsync((int)SceneEnum.PrototypingScene);
+        SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive);
         Time.timeScale = 1f; // Resume game time
     }
     void ExitToDesktop()

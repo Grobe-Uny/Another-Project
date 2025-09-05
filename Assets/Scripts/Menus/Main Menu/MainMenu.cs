@@ -31,8 +31,8 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         #if UNITY_EDITOR
-        if (!SceneManager.GetSceneByName("ManagerLoader").isLoaded)
-            SceneManager.LoadSceneAsync((int)SceneEnum.ManagerHolder, LoadSceneMode.Additive);
+        if (!SceneManager.GetSceneByName("PersistentScene").isLoaded && SceneManager.loadedSceneCount == 1)
+            SceneManager.LoadSceneAsync((int)SceneEnum.PersistentScene, LoadSceneMode.Additive);
         #endif
         originalPosition = ExitPromptRectTransform.position.y;
         InitializeButtons();
@@ -52,7 +52,7 @@ public class MainMenu : MonoBehaviour
     public void BeginNewGame()
     {
         Debug.Log("Starting New Game!");
-        SceneManager.LoadSceneAsync((int)SceneEnum.PrototypingScene, LoadSceneMode.Single);
+        GameManager.instance.LoadGame();
     }
 
     void OpenOptions()

@@ -10,7 +10,8 @@ hided cursor in game and locked it to the centre of the screen
 add pause menu
 add game state manager
 added sprinting
-added jumping
+added jumping // needs fixing
+added loading screen -- ! --> prone to changes
 -------------------------Bugs-----------------------------
 v a0.0.1
 when stoping movement character glitches in place then continues with animation (fixed)
