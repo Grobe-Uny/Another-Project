@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Benetti;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,6 +10,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject LoadingScreen;
     public Slider loadingBar;
+    
+    
+    [Space]
+    [SerializeField]private RectTransform loadingScreenLeft, loadingScreenRight;
     void Start()
     {
         if (instance == null)
@@ -31,12 +36,27 @@ public class GameManager : MonoBehaviour
     
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
 
-    public void LoadGame()
+    /*public void LoadGame()
     {
         LoadingScreen.SetActive(true);
         scenesLoading.Add(SceneManager.UnloadSceneAsync((int)SceneEnum.MainMenu));
         scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneEnum.PrototypingScene, LoadSceneMode.Additive));
         
+        StartCoroutine(GetSceneLoadProgress());
+    }*/
+    
+    public void LoadGame()
+    {
+        /*RectTransform[] loadingScreenParts =  { loadingScreenLeft, loadingScreenRight };
+        UIAnimations.SlideXUIsLinearCustomActions(loadingScreenParts, 0, 2f, () => { LoadingScreen.SetActive(true); },
+            () => { });*/
+     LoadingScreen.SetActive(true);
+
+        // Unload MainMenu i Loadaj Gameplay scenu
+        scenesLoading.Clear();
+        scenesLoading.AddRange(SceneHandler.UnloadScenesAsync(new int[] { (int)SceneEnum.MainMenu }));
+        scenesLoading.AddRange(SceneHandler.LoadScenesAsync(new int[] { (int)SceneEnum.PrototypingScene }));
+
         StartCoroutine(GetSceneLoadProgress());
     }
 
@@ -60,6 +80,13 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
         }
+        /*RectTransform[] loadingScreenParts =  { loadingScreenLeft, loadingScreenRight };
+        float[] positions = { -960f, 960f };
+        UIAnimations.SlideXiUIsLinearCustomActions(loadingScreenParts, positions, 2f, () => { },
+            () => { LoadingScreen.SetActive(false); });*/
         LoadingScreen.SetActive(false);
+        scenesLoading.Clear();
     }
+
 }
+
