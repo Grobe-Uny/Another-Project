@@ -51,7 +51,15 @@ public class MovementStateManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {           
+    {
+        if (hzInput != 0 || vInput != 0)
+        {
+            characterAnimator.SetBool("noInput", true);
+        }
+        else
+        {
+            characterAnimator.SetBool("noInput", false);
+        }
         GetDirectionAndMove();
         GravityCalculation();
         

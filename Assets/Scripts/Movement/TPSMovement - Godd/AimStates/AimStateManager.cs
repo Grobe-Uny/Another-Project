@@ -1,6 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AimStateManager : MonoBehaviour
@@ -17,7 +15,7 @@ public class AimStateManager : MonoBehaviour
 
     public Animator CharacterAnimator;
     [Header("Parameters for changing fov when aiming")]
-    public CinemachineFreeLook VirtualCamera;
+    public CinemachineVirtualCamera VirtualCamera;
     public float ADSFov = 40f;
     public float CurrentFov;
     public float HipFov;
@@ -45,7 +43,7 @@ public class AimStateManager : MonoBehaviour
         yAxis -= Input.GetAxisRaw("Mouse Y") * MouseSense;
         Mathf.Clamp(yAxis, -80, 80);
 
-        VirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(VirtualCamera.m_Lens.FieldOfView, CurrentFov, FovSmoothSpeed * Time.deltaTime);
+        //VirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(VirtualCamera.m_Lens.FieldOfView, CurrentFov, FovSmoothSpeed * Time.deltaTime);
 
         Vector2 screenCentre = new Vector2 (Screen.width/2, Screen.height/2);
         Ray ray = Camera.main.ScreenPointToRay(screenCentre);

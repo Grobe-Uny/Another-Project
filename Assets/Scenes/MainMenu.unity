@@ -1844,8 +1844,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Robot
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 775e9e5272a7bf748aee3591077b9256, type: 2}
-  m_sharedMaterial: {fileID: -3324524134175755534, guid: 775e9e5272a7bf748aee3591077b9256,
+  m_fontAsset: {fileID: 11400000, guid: 759a029cd5249074e8bba1a4bd7c5c5f, type: 2}
+  m_sharedMaterial: {fileID: 7726567924987774458, guid: 759a029cd5249074e8bba1a4bd7c5c5f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1870,7 +1870,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 76
+  m_fontSize: 68.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2918,8 +2918,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Rebellion
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 775e9e5272a7bf748aee3591077b9256, type: 2}
-  m_sharedMaterial: {fileID: -3324524134175755534, guid: 775e9e5272a7bf748aee3591077b9256,
+  m_fontAsset: {fileID: 11400000, guid: 759a029cd5249074e8bba1a4bd7c5c5f, type: 2}
+  m_sharedMaterial: {fileID: 7726567924987774458, guid: 759a029cd5249074e8bba1a4bd7c5c5f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2944,7 +2944,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 73.3
+  m_fontSize: 106.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
