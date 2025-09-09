@@ -7,7 +7,7 @@ namespace Benetti
     /// <summary>
     /// A helper class for handling common UI animations using LeanTween.
     /// </summary>
-    public class UIAnimations 
+    public class UIAnimations
     {
         /// <summary>
         /// Scales a UI element up on hover.
@@ -59,7 +59,8 @@ namespace Benetti
             LeanTween.moveY(rTransform, position, time).setEaseLinear();
         }
 
-        public static void SlideYUILinearWithDisable(RectTransform rTransform, float position, float time, Action OnComplete = null, Action OnStart = null)
+        public static void SlideYUILinearWithDisable(RectTransform rTransform, float position, float time,
+            Action OnComplete = null, Action OnStart = null)
         {
             OnStart?.Invoke();
             LeanTween.moveY(rTransform, position, time).setEaseLinear()
@@ -78,26 +79,74 @@ namespace Benetti
         public static void ScaleUIWithDisable(RectTransform rTransform, Vector2 newPosition, float duration)
         {
             LeanTween.size(rTransform, newPosition, duration).setEaseInQuad()
-                .setOnComplete(() => {rTransform.gameObject.SetActive(false); });
+                .setOnComplete(() => { rTransform.gameObject.SetActive(false); });
         }
 
         public static void FadeUI(RectTransform rTransform, float alpha, float duration)
         {
             LeanTween.alpha(rTransform, alpha, duration).setEaseInQuad();
-        } 
-        public static void FadeUICustomAction(RectTransform rTransform, float alpha, float duration, Action OnStart = null, Action OnComplete = null)
+        }
+
+        public static void FadeUICustomAction(RectTransform rTransform, float alpha, float duration,
+            Action OnStart = null, Action OnComplete = null)
         {
             OnStart?.Invoke();
             LeanTween.alpha(rTransform, alpha, duration).setEaseInQuad()
-                .setOnComplete(() => {OnComplete?.Invoke();});
+                .setOnComplete(() => { OnComplete?.Invoke(); });
         }
 
         public static void SlideYUILinearCustomAction(RectTransform rTransform, float position, float time,
             Action OnComplete = null)
         {
             LeanTween.moveY(rTransform, position, time).setEaseLinear()
-                .setOnComplete(() => {OnComplete?.Invoke();});
+                .setOnComplete(() => { OnComplete?.Invoke(); });
+        }
+
+        public static void SlideXUILinearCustomActions(RectTransform rTransform, float position, float time,
+            Action OnStart = null, Action OnComplete = null)
+        {
+            OnStart?.Invoke();
+            LeanTween.moveX(rTransform, position, time).setEaseLinear()
+                .setOnComplete(() => { OnComplete?.Invoke(); });
+        }
+
+        public static void SlideXUIsLinearCustomActions(RectTransform[] rTransform, float position, float time,
+            Action OnStart = null, Action OnComplete = null)
+        {
+            OnStart?.Invoke();
+            foreach (var transform in rTransform)
+            {
+                LeanTween.moveX(transform, position, time).setEaseLinear()
+                    .setOnComplete(() => { OnComplete?.Invoke(); });
+            }
+        }
+
+        public static void SlideXiUIsLinearCustomActions(RectTransform[] rTransform, float[] position, float time,
+            Action OnStart = null, Action OnComplete = null)
+        {
+            if (rTransform.Length != position.Length)
+            {
+                Debug.LogError("rTransform and position arrays must have the same length.");
+                return;
+            }
+            OnStart?.Invoke();
+            int completed = 0;
+            for (int i = 0; i < rTransform.Length; i++)
+            {
+                int index = i; // Capture the current index
+                LeanTween.moveX(rTransform[index], position[index], time).setEaseLinear()
+                    .setOnComplete(() =>
+                    {
+                        completed++;
+                        if (completed == rTransform.Length)
+                        {
+                            OnComplete?.Invoke();
+                        }
+                    });
+
+            }
         }
     }
 }
+
 

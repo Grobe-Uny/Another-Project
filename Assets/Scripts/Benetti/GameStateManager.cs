@@ -13,21 +13,6 @@ namespace Benetti
             Options,
             Loading
         }
-        
-        public static Scene currentScene;
-        static void Awake()
-        {
-            currentScene = SceneManager.GetActiveScene();
-            switch (currentScene.name)
-            {
-                case "MainMenu":
-                    SetState(GameState.MainMenu);
-                    break;
-                case "PrototypingScene":
-                    SetState(GameState.InGame);
-                    break;
-            }
-        }
         public static GameState CurrentState { get; private set; } = GameState.MainMenu;
         
         // <summary>
