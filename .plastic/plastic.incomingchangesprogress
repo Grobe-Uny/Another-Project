@@ -1,0 +1,68 @@
+[
+  {
+    "MountId": "56e62dd7-241f-41e9-8c6b-dd4ca4513e62",
+    "AncestorCsetIds": [
+      23
+    ],
+    "SourceCsetId": 26,
+    "DestinationCsetId": 23,
+    "FileConflicts": [
+      {
+        "Path": "/ProjectSettings/EditorBuildSettings.asset",
+        "ItemId": 138,
+        "ParentItemId": 131,
+        "BaseRevId": 8861,
+        "SourceRevId": 9275,
+        "DestinationRevId": 8861
+      },
+      {
+        "Path": "/.git/COMMIT_EDITMSG",
+        "ItemId": 4110,
+        "ParentItemId": 2484,
+        "BaseRevId": 8685,
+        "SourceRevId": 9165,
+        "DestinationRevId": 8685
+      },
+      {
+        "Path": "/.git/index",
+        "ItemId": 2496,
+        "ParentItemId": 2484,
+        "BaseRevId": 8688,
+        "SourceRevId": 9168,
+        "DestinationRevId": 8688
+      },
+      {
+        "Path": "/.git/refs/heads/main",
+        "ItemId": 3429,
+        "ParentItemId": 2939,
+        "BaseRevId": 8783,
+        "SourceRevId": 9202,
+        "DestinationRevId": 8783
+      },
+      {
+        "Path": "/.git/refs/remotes/origin/main",
+        "ItemId": 4195,
+        "ParentItemId": 3430,
+        "BaseRevId": 8784,
+        "SourceRevId": 9203,
+        "DestinationRevId": 8784
+      },
+      {
+        "Path": "/.git/FETCH_HEAD",
+        "ItemId": 2492,
+        "ParentItemId": 2484,
+        "BaseRevId": 9122,
+        "SourceRevId": 9167,
+        "DestinationRevId": 9122
+      },
+      {
+        "Path": "/.idea/.idea.Another-Project/.idea/workspace.xml",
+        "ItemId": 4192,
+        "ParentItemId": 3859,
+        "BaseRevId": 9123,
+        "SourceRevId": 9483,
+        "DestinationRevId": 9123
+      }
+    ]
+  }
+]
