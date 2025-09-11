@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -133,18 +134,14 @@ public class MovementStateManager : MonoBehaviour
 
         direction = transform.forward * vInput + transform.right * hzInput;
 
-        /*if (Input.GetKey(SprintKey))
-        {
-            characterController.Move(direction.normalized * RunSpeed * Time.deltaTime);
-           // characterController.Move(direction.normalized * playerStats.RunningSpeedStat.BaseValue * Time.deltaTime);
-        }
-        else
-        {
-            characterController.Move(direction.normalized * WalkSpeed * Time.deltaTime);
-            //characterController.Move(direction.normalized * playerStats.WalkingSpeedStat.BaseValue * Time.deltaTime);
-        }*/
         characterController.Move(direction.normalized * currentMoveSpeed * Time.deltaTime);
     }
+
+    private void OnAnimatorMove()
+    {
+        
+    }
+
     public void JumpingForce() => Velocity.y += JumpForce;
 
     public void jumped() => Jumped = true;

@@ -22,7 +22,7 @@ public class AimStateManager : MonoBehaviour
     public float FovSmoothSpeed = 10;
 
     [Header("Parameters for Aiming")]
-    //public Transform AimPosition;
+    public Transform AimPosition;
     public float AimSmoothSpeed = 20f;
     public LayerMask AimLayerMask;
 
@@ -32,8 +32,8 @@ public class AimStateManager : MonoBehaviour
 
     void Start()
     {
-        SwitchState(Hip);
         HipFov = VirtualCamera.m_Lens.FieldOfView;
+        SwitchState(Hip);
     }
 
     // Update is called once per frame
@@ -50,7 +50,7 @@ public class AimStateManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, AimLayerMask)) 
         {
-            //AimPosition.position = Vector3.Lerp(AimPosition.position, hit.point, AimSmoothSpeed * Time.deltaTime);
+            AimPosition.position = Vector3.Lerp(AimPosition.position, hit.point, AimSmoothSpeed * Time.deltaTime);
         }
 
         CurrentState.UpdateState(this);
